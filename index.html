@@ -1,10 +1,191 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Hello GitHub Pages</title>
-</head>
-<body>
-  <h1>🚀 Welcome to My GitHub Pages site!</h1>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>My GitHub Pages Site</title>
+    <meta name="description" content="A minimal, multilingual sample page for GitHub Pages." />
+
+    <!-- Minimal, self-contained styles (no build step) -->
+    <style>
+      :root { --bg: #0b1020; --fg: #e7ecff; --muted:#9aa3b2; --accent:#7c4dff; --card:#141b34; }
+      html { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Noto Sans', 'Helvetica Neue', Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+      body { margin:0; background: var(--bg); color: var(--fg); line-height:1.6; }
+      header { position:sticky; top:0; backdrop-filter: blur(6px); background: color-mix(in oklab, var(--bg) 85%, transparent); border-bottom: 1px solid #222842; }
+      .container { max-width: 980px; margin: 0 auto; padding: 1.25rem; }
+      .row { display:flex; gap:1rem; align-items:center; justify-content: space-between; flex-wrap:wrap; }
+      .brand { font-weight:700; letter-spacing:.3px; }
+      .lang { display:flex; gap:.5rem; align-items:center; }
+      select { background: var(--card); color: var(--fg); border:1px solid #2a335a; border-radius:10px; padding:.5rem .75rem; }
+      main { padding-block: 2rem 4rem; }
+      .hero { display:grid; gap: .75rem; }
+      .hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin:0; }
+      .muted { color: var(--muted); }
+      .cards { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1rem; margin-top:1.25rem; }
+      .card { background: var(--card); border:1px solid #222842; border-radius:16px; padding:1rem; box-shadow: 0 6px 24px rgba(0,0,0,.25); }
+      .card h3 { margin:.25rem 0 .5rem; font-size:1.05rem; }
+      a.btn { display:inline-block; background:var(--accent); color:white; text-decoration:none; padding:.6rem .9rem; border-radius:12px; font-weight:600; }
+      footer { border-top: 1px solid #222842; }
+      pre { overflow:auto; border-radius:12px; border:1px solid #222842; }
+      code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    </style>
+
+    <!-- Syntax highlighting (works on static hosting) -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"></noscript>
+  </head>
+
+  <body>
+    <header>
+      <div class="container row">
+        <div class="brand">🔗 <span data-i18n="brand">My Site</span></div>
+        <div class="lang">
+          <label for="lang" class="muted" data-i18n="language_label">Language</label>
+          <select id="lang" aria-label="Site language">
+            <option value="en" selected>English</option>
+            <option value="hi">हिन्दी</option>
+            <option value="gu">ગુજરાતી</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <h1 data-i18n="title">Welcome to my GitHub Pages site</h1>
+        <p class="muted" data-i18n="tagline">A tiny, fast, multilingual starter with code highlighting.</p>
+        <a class="btn" href="#projects" data-i18n="cta">See Projects</a>
+      </section>
+
+      <section class="cards" id="projects" aria-labelledby="projects-title">
+        <article class="card">
+          <h3 id="projects-title" data-i18n="projects">Projects</h3>
+          <p data-i18n="projects_desc">Here are some example projects. Replace these with your own.</p>
+          <ul>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Docs</a></li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3 data-i18n="about">About</h3>
+          <p data-i18n="about_desc">I build fast, accessible websites with modern tooling.</p>
+        </article>
+
+        <article class="card">
+          <h3 data-i18n="contact">Contact</h3>
+          <p data-i18n="contact_desc">Reach me at <a href="mailto:you@example.com">you@example.com</a>.</p>
+        </article>
+      </section>
+
+      <section class="card" style="margin-top:1rem">
+        <h3 data-i18n="code_sample">Code sample</h3>
+        <pre><code class="language-javascript">// Simple greeting function
+function greet(name) {
+  const msg = `Hello, ${name}!`;
+  console.log(msg);
+  return msg;
+}
+
+// Try it
+greet('World');
+        </code></pre>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container" style="padding:1.25rem">
+        <small class="muted">© <span id="year"></span> · <span data-i18n="footer">Built with GitHub Pages</span></small>
+      </div>
+    </footer>
+
+    <!-- i18n dictionary + logic (no framework) -->
+    <script>
+      const I18N = {
+        en: {
+          brand: "My Site",
+          language_label: "Language",
+          title: "Welcome to my GitHub Pages site",
+          tagline: "A tiny, fast, multilingual starter with code highlighting.",
+          cta: "See Projects",
+          projects: "Projects",
+          projects_desc: "Here are some example projects. Replace these with your own.",
+          about: "About",
+          about_desc: "I build fast, accessible websites with modern tooling.",
+          contact: "Contact",
+          contact_desc: "Reach me at",
+          code_sample: "Code sample",
+          footer: "Built with GitHub Pages",
+        },
+        hi: {
+          brand: "मेरा साइट",
+          language_label: "भाषा",
+          title: "मेरी GitHub Pages साइट पर स्वागत है",
+          tagline: "छोटा, तेज़, बहुभाषी स्टार्टर—कोड हाइलाइटिंग के साथ।",
+          cta: "प्रोजेक्ट्स देखें",
+          projects: "प्रोजेक्ट्स",
+          projects_desc: "यहाँ कुछ उदाहरण प्रोजेक्ट्स हैं। इन्हें अपने प्रोजेक्ट्स से बदलें।",
+          about: "परिचय",
+          about_desc: "मैं आधुनिक उपकरणों से तेज़ और सुलभ वेबसाइट बनाता/बनाती हूँ।",
+          contact: "संपर्क",
+          contact_desc: "मुझसे यहाँ संपर्क करें:",
+          code_sample: "कोड उदाहरण",
+          footer: "GitHub Pages से निर्मित",
+        },
+        gu: {
+          brand: "મારું સાઇટ",
+          language_label: "ભાષા",
+          title: "મારી GitHub Pages સાઇટમાં આપનું સ્વાગત છે",
+          tagline: "નાનું, ઝડપી, બહુભાષી સ્ટાર્ટર—કોડ હાઈલાઇટિંગ સાથે.",
+          cta: "પ્રોજેક્ટ જુઓ",
+          projects: "પ્રોજેક્ટ્સ",
+          projects_desc: "અહીં થોડા ઉદાહરણ પ્રોજેક્ટ્સ છે. આને તમારા પ્રોજેક્ટ્સથી બદલો.",
+          about: "વિશે",
+          about_desc: "હું આધુનિક ટૂલિંગથી ઝડપી અને સુલભ વેબસાઈટ બનાવું છું.",
+          contact: "સંપર્ક",
+          contact_desc: "મારો સંપર્ક કરો:",
+          code_sample: "કોડ ઉદાહરણ",
+          footer: "GitHub Pages વડે બનાવેલ",
+        }
+      };
+
+      // persist language choice
+      const select = document.getElementById('lang');
+      const prefer = localStorage.getItem('lang') || (navigator.language||'en').slice(0,2);
+      if (I18N[prefer]) {
+        document.documentElement.lang = prefer;
+        select.value = prefer;
+      }
+
+      function applyLang(lang) {
+        const dict = I18N[lang] || I18N.en;
+        document.documentElement.lang = lang;
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (dict[key]) {
+            if (el.tagName.toLowerCase() === 'input' || el.tagName.toLowerCase() === 'textarea') {
+              el.placeholder = dict[key];
+            } else {
+              el.textContent = dict[key];
+            }
+          }
+        });
+        localStorage.setItem('lang', lang);
+      }
+
+      select.addEventListener('change', e => applyLang(e.target.value));
+      applyLang(document.documentElement.lang || 'en');
+
+      // year
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+    <!-- highlight.js (deferred) -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script defer>
+      window.addEventListener('load', () => { if (window.hljs) window.hljs.highlightAll(); });
+    </script>
+  </body>
 </html>
