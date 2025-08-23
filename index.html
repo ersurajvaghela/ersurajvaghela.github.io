@@ -443,50 +443,132 @@
 
             const downloadResume = async () => {
                 try {
-                    // Try to read the PDF file from the uploaded documents
-                    const fileData = await window.fs.readFile('public/suraj-vaghela-8-years-nodejs-php-experience.pdf');
+                    // Download the actual PDF resume from the provided URL
+                    const pdfUrl = 'https://ersurajvaghela.github.io/public/suraj-vaghela-8-years-nodejs-php-experience.pdf';
                     
-                    // Create a blob from the file data
-                    const blob = new Blob([fileData], { type: 'application/pdf' });
+                    // Fetch the PDF file
+                    const response = await fetch(pdfUrl);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    // Get the PDF data as blob
+                    const blob = await response.blob();
+                    
+                    // Create download link
                     const url = URL.createObjectURL(blob);
-                    
-                    // Create a temporary link element and trigger download
                     const link = document.createElement('a');
                     link.href = url;
                     link.download = 'Suraj_Vaghela_Resume.pdf';
+                    link.style.display = 'none';
+                    
+                    // Trigger download
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
                     
-                    // Clean up the URL object
+                    // Clean up
                     URL.revokeObjectURL(url);
+                    
+                    // Show success message
+                    setTimeout(() => {
+                        console.log('PDF resume downloaded successfully!');
+                    }, 100);
+                    
                 } catch (error) {
-                    console.error('Error downloading resume:', error);
-                    // Fallback: Create a simple text file with contact info if PDF fails
-                    const resumeText = `
+                    console.error('Error downloading PDF resume:', error);
+                    
+                    // Fallback: Create a comprehensive text resume
+                    const resumeContent = `
 SURAJ VAGHELA
 Full-Stack Software Engineer & Team Lead
+Phone: +91 9098 111 143 | Email: vaghelasuraj@ymail.com
+Location: Indore, Madhya Pradesh, India
 
-Contact Information:
-Phone: +91 9098 111 143
-Email: vaghelasuraj@ymail.com
-Location: Indore, Madhya Pradesh
+PROFESSIONAL SUMMARY
+===================
+Experienced Full-Stack Software Engineer with 8+ years in modern web development
+and team leadership. Proven expertise in Node.js(Express.js, NestJS), PHP
+(Laravel, CodeIgniter, YII2), JavaScript(jQuery). Strong background in serverless
+architecture with AWS Lambda, cloud services (AWS S3, EC2), Firebase and real-time
+applications using Socket.io. Currently leading development teams and mentoring junior
+developers while delivering scalable web applications, APIs, and cloud-based solutions.
 
-Experience: 8+ years in modern web development and team leadership
-Specializes in: Node.js, PHP, AWS, Team Leadership, Scalable Web Applications
+TECHNICAL SKILLS
+===============
+Programming Languages: Node.js, PHP, JavaScript, SQL
+Backend Frameworks: Express.js, NestJS, Laravel, Yii, Yii2, CodeIgniter  
+Frontend Technologies: JavaScript, jQuery, HTML5, CSS3
+Databases: PostgreSQL, MySQL, MS SQL, Firestore, Elasticsearch
+Cloud Platforms: AWS Lambda, AWS S3, AWS EC2, AWS RDS, Google Cloud Functions, Firebase
+Development Tools: Socket.io, RESTful APIs, Web Services, Git, GraphQL
+Specializations: SQL Optimization, Project Estimation, Requirements Analysis, Team Leadership
+AI Tools: ChatGPT, Github Copilot, CursorAI, ClaudeAI, GanAI
 
-For complete resume, please contact directly.
+PROFESSIONAL EXPERIENCE
+=======================
+
+Module Lead | BitCot Technologies Pvt Ltd | Indore, MP | August 2022 – Present
+• Lead development team in creating scalable web applications and web services using PHP, Laravel, and Node.js
+• Establish project architecture and operational workflows, improving development efficiency by 30%
+• Conduct comprehensive project estimation and requirements analysis for 15+ client projects
+• Optimize SQL queries and database performance, achieving 40% improvement in application response times
+• Mentor and train 8+ junior developers and freshers, contributing to team skill development
+• Coordinate cross-functional software development teams ensuring 100% on-time project delivery
+• Drive continuous learning initiatives and stay current with emerging technologies
+
+Senior Software Engineer | Space-O Technologies | Ahmedabad, Gujarat | August 2018 – July 2022
+• Developed complex web applications and RESTful web services using PHP frameworks including Laravel, Yii, and Yii2
+• Designed and implemented system architecture and operational workflows for 20+ client projects
+• Performed detailed project estimation and technical requirements analysis
+• Collaborated with cross-functional teams to deliver high-quality software solutions
+• Implemented best practices in code development and maintained clean, efficient codebases
+• Achieved 95% client satisfaction rate through quality deliverables
+
+Web Developer | Random Soft Solution | Indore, MP | February 2017 – July 2018
+• Built responsive web applications using PHP, MySQL, JavaScript, and jQuery
+• Developed 10+ dynamic websites with focus on user experience and performance optimization
+• Worked with various PHP frameworks to create robust backend systems
+• Gained foundational experience in full-stack web development
+• Contributed to 25% reduction in page load times through optimization techniques
+
+EDUCATION
+=========
+Bachelor of Engineering in Computer Science Engineering
+Rajiv Gandhi Proudyogiki Vishwavidyalaya (RGPV) | Bhopal, MP | September 2011 – May 2016
+
+KEY ACHIEVEMENTS
+===============
+• Successfully led 35+ development projects from conception to deployment
+• Implemented efficient database optimization strategies improving query performance by 40%
+• Established training programs for junior developers, enhancing team productivity by 30%
+• Maintained 100% on-time project delivery record as Module Lead
+• Developed scalable web applications serving 10,000+ users
+• Improved development efficiency by 30% through structured processes and workflows
+
+---
+PDF version temporarily unavailable. For the latest PDF resume, please contact directly.
+Contact: vaghelasuraj@ymail.com | +91 9098 111 143
                     `;
-                    
-                    const blob = new Blob([resumeText], { type: 'text/plain' });
-                    const url = URL.createObjectURL(blob);
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.download = 'Suraj_Vaghela_Contact_Info.txt';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    URL.revokeObjectURL(url);
+
+                    try {
+                        const blob = new Blob([resumeContent], { type: 'text/plain;charset=utf-8' });
+                        const url = URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = 'Suraj_Vaghela_Resume.txt';
+                        link.style.display = 'none';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        URL.revokeObjectURL(url);
+                        
+                        alert('PDF temporarily unavailable. Text version downloaded. For PDF, please contact directly.');
+                    } catch (fallbackError) {
+                        console.error('Fallback download error:', fallbackError);
+                        alert('Download unavailable. Please contact directly at vaghelasuraj@ymail.com for resume.');
+                    }
                 }
             };
 
