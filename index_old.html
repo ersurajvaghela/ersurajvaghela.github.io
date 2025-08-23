@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suraj Vaghela - Full-Stack Software Engineer</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8fafc;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="white" opacity="0.1"/><circle cx="10" cy="90" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #fff, #e2e8f0);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #667eea;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .name {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .title {
+            font-size: 1.3rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.9;
+        }
+        
+        .section {
+            padding: 60px 0;
+            background: white;
+            margin: 20px 0;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #2d3748;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .summary {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #4a5568;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .skill-category {
+            background: #f7fafc;
+            padding: 30px;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .skill-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .skill-tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .experience-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline-item {
+            background: #f7fafc;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            position: relative;
+            border-left: 4px solid #667eea;
+        }
+        
+        .job-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        
+        .company {
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .duration {
+            color: #718096;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .achievements {
+            list-style: none;
+        }
+        
+        .achievements li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .achievements li::before {
+            content: '▸';
+            color: #667eea;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .achievement-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .achievement-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .achievement-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .achievement-text {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .education {
+            background: #f7fafc;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .degree {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .university {
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .footer {
+            background: #2d3748;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .resume-download {
+            margin-top: 30px;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(72, 187, 120, 0.6);
+            background: linear-gradient(135deg, #38a169, #2f855a);
+        }
+        
+        .download-btn:active {
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .name {
+                font-size: 2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .section {
+                margin: 10px 0;
+                padding: 40px 0;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .achievements-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        function Portfolio() {
+            const [isVisible, setIsVisible] = useState(false);
+
+            useEffect(() => {
+                setIsVisible(true);
+            }, []);
+
+            const skills = {
+                "Programming Languages": {
+                    icon: "fas fa-code",
+                    skills: ["Node.js", "PHP", "JavaScript", "SQL"]
+                },
+                "Backend Frameworks": {
+                    icon: "fas fa-server",
+                    skills: ["Express.js", "NestJS", "Laravel", "Yii", "Yii2", "CodeIgniter"]
+                },
+                "Frontend Technologies": {
+                    icon: "fas fa-paint-brush",
+                    skills: ["JavaScript", "jQuery", "HTML5", "CSS3"]
+                },
+                "Databases": {
+                    icon: "fas fa-database",
+                    skills: ["PostgreSQL", "MySQL", "MS SQL", "Firestore", "Elasticsearch"]
+                },
+                "Cloud Platforms": {
+                    icon: "fas fa-cloud",
+                    skills: ["AWS Lambda", "AWS S3", "AWS EC2", "AWS RDS", "Google Cloud Functions", "Firebase"]
+                },
+                "Development Tools": {
+                    icon: "fas fa-tools",
+                    skills: ["Socket.io", "RESTful APIs", "Web Services", "Git", "GraphQL"]
+                },
+                "AI Tools": {
+                    icon: "fas fa-robot",
+                    skills: ["ChatGPT", "Github Copilot", "CursorAI", "ClaudeAI", "GanAI"]
+                }
+            };
+
+            const experiences = [
+                {
+                    title: "Module Lead",
+                    company: "BitCot Technologies Pvt Ltd",
+                    location: "Indore, Madhya Pradesh",
+                    duration: "August 2022 – Present",
+                    achievements: [
+                        "Lead development team in creating scalable web applications using PHP, Laravel, and Node.js",
+                        "Improved development efficiency by 30% through structured processes",
+                        "Conducted project estimation for 15+ client projects",
+                        "Optimized SQL queries achieving 40% improvement in response times",
+                        "Mentored 8+ junior developers",
+                        "Achieved 100% on-time project delivery"
+                    ]
+                },
+                {
+                    title: "Senior Software Engineer",
+                    company: "Space-O Technologies",
+                    location: "Ahmedabad, Gujarat",
+                    duration: "August 2018 – July 2022",
+                    achievements: [
+                        "Developed complex web applications using PHP frameworks",
+                        "Designed system architecture for 20+ client projects",
+                        "Performed detailed project estimation and requirements analysis",
+                        "Achieved 95% client satisfaction rate",
+                        "Implemented best practices in code development"
+                    ]
+                },
+                {
+                    title: "Web Developer",
+                    company: "Random Soft Solution",
+                    location: "Indore, Madhya Pradesh",
+                    duration: "February 2017 – July 2018",
+                    achievements: [
+                        "Built responsive web applications using PHP, MySQL, JavaScript",
+                        "Developed 10+ dynamic websites",
+                        "Contributed to 25% reduction in page load times",
+                        "Gained foundational experience in full-stack development"
+                    ]
+                }
+            ];
+
+            const achievements = [
+                { number: "35+", text: "Projects Led to Deployment" },
+                { number: "40%", text: "Database Performance Improvement" },
+                { number: "30%", text: "Team Productivity Enhancement" },
+                { number: "10K+", text: "Users Served by Applications" },
+                { number: "8+", text: "Years of Experience" },
+                { number: "100%", text: "On-time Delivery Record" }
+            ];
+
+            const downloadResume = async () => {
+                try {
+                    // Download the actual PDF resume from the provided URL
+                    const pdfUrl = 'https://ersurajvaghela.github.io/public/suraj-vaghela-8-years-nodejs-php-experience.pdf';
+                    
+                    // Fetch the PDF file
+                    const response = await fetch(pdfUrl);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    // Get the PDF data as blob
+                    const blob = await response.blob();
+                    
+                    // Create download link
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'Suraj_Vaghela_Resume.pdf';
+                    link.style.display = 'none';
+                    
+                    // Trigger download
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    // Clean up
+                    URL.revokeObjectURL(url);
+                    
+                    // Show success message
+                    setTimeout(() => {
+                        console.log('PDF resume downloaded successfully!');
+                    }, 100);
+                    
+                } catch (error) {
+                    console.error('Error downloading PDF resume:', error);
+                    
+                    // Fallback: Create a comprehensive text resume
+                    const resumeContent = `
+SURAJ VAGHELA
+Full-Stack Software Engineer & Team Lead
+Phone: +91 9098 111 143 | Email: vaghelasuraj@ymail.com
+Location: Indore, Madhya Pradesh, India
+
+PROFESSIONAL SUMMARY
+===================
+Experienced Full-Stack Software Engineer with 8+ years in modern web development
+and team leadership. Proven expertise in Node.js(Express.js, NestJS), PHP
+(Laravel, CodeIgniter, YII2), JavaScript(jQuery). Strong background in serverless
+architecture with AWS Lambda, cloud services (AWS S3, EC2), Firebase and real-time
+applications using Socket.io. Currently leading development teams and mentoring junior
+developers while delivering scalable web applications, APIs, and cloud-based solutions.
+
+TECHNICAL SKILLS
+===============
+Programming Languages: Node.js, PHP, JavaScript, SQL
+Backend Frameworks: Express.js, NestJS, Laravel, Yii, Yii2, CodeIgniter  
+Frontend Technologies: JavaScript, jQuery, HTML5, CSS3
+Databases: PostgreSQL, MySQL, MS SQL, Firestore, Elasticsearch
+Cloud Platforms: AWS Lambda, AWS S3, AWS EC2, AWS RDS, Google Cloud Functions, Firebase
+Development Tools: Socket.io, RESTful APIs, Web Services, Git, GraphQL
+Specializations: SQL Optimization, Project Estimation, Requirements Analysis, Team Leadership
+AI Tools: ChatGPT, Github Copilot, CursorAI, ClaudeAI, GanAI
+
+PROFESSIONAL EXPERIENCE
+=======================
+
+Module Lead | BitCot Technologies Pvt Ltd | Indore, MP | August 2022 – Present
+• Lead development team in creating scalable web applications and web services using PHP, Laravel, and Node.js
+• Establish project architecture and operational workflows, improving development efficiency by 30%
+• Conduct comprehensive project estimation and requirements analysis for 15+ client projects
+• Optimize SQL queries and database performance, achieving 40% improvement in application response times
+• Mentor and train 8+ junior developers and freshers, contributing to team skill development
+• Coordinate cross-functional software development teams ensuring 100% on-time project delivery
+• Drive continuous learning initiatives and stay current with emerging technologies
+
+Senior Software Engineer | Space-O Technologies | Ahmedabad, Gujarat | August 2018 – July 2022
+• Developed complex web applications and RESTful web services using PHP frameworks including Laravel, Yii, and Yii2
+• Designed and implemented system architecture and operational workflows for 20+ client projects
+• Performed detailed project estimation and technical requirements analysis
+• Collaborated with cross-functional teams to deliver high-quality software solutions
+• Implemented best practices in code development and maintained clean, efficient codebases
+• Achieved 95% client satisfaction rate through quality deliverables
+
+Web Developer | Random Soft Solution | Indore, MP | February 2017 – July 2018
+• Built responsive web applications using PHP, MySQL, JavaScript, and jQuery
+• Developed 10+ dynamic websites with focus on user experience and performance optimization
+• Worked with various PHP frameworks to create robust backend systems
+• Gained foundational experience in full-stack web development
+• Contributed to 25% reduction in page load times through optimization techniques
+
+EDUCATION
+=========
+Bachelor of Engineering in Computer Science Engineering
+Rajiv Gandhi Proudyogiki Vishwavidyalaya (RGPV) | Bhopal, MP | September 2011 – May 2016
+
+KEY ACHIEVEMENTS
+===============
+• Successfully led 35+ development projects from conception to deployment
+• Implemented efficient database optimization strategies improving query performance by 40%
+• Established training programs for junior developers, enhancing team productivity by 30%
+• Maintained 100% on-time project delivery record as Module Lead
+• Developed scalable web applications serving 10,000+ users
+• Improved development efficiency by 30% through structured processes and workflows
+
+---
+PDF version temporarily unavailable. For the latest PDF resume, please contact directly.
+Contact: vaghelasuraj@ymail.com | +91 9098 111 143
+                    `;
+
+                    try {
+                        const blob = new Blob([resumeContent], { type: 'text/plain;charset=utf-8' });
+                        const url = URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = 'Suraj_Vaghela_Resume.txt';
+                        link.style.display = 'none';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        URL.revokeObjectURL(url);
+                        
+                        alert('PDF temporarily unavailable. Text version downloaded. For PDF, please contact directly.');
+                    } catch (fallbackError) {
+                        console.error('Fallback download error:', fallbackError);
+                        alert('Download unavailable. Please contact directly at vaghelasuraj@ymail.com for resume.');
+                    }
+                }
+            };
+
+            return (
+                <div className={`portfolio ${isVisible ? 'visible' : ''}`}>
+                    {/* Header Section */}
+                    <header className="header">
+                        <div className="container">
+                            <div className="header-content">
+                                <div className="profile-img">
+                                    <i className="fas fa-user"></i>
+                                </div>
+                                <h1 className="name">SURAJ VAGHELA</h1>
+                                <p className="title">Full-Stack Software Engineer & Team Lead</p>
+                                <div className="contact-info">
+                                    <div className="contact-item">
+                                        <i className="fas fa-phone"></i>
+                                        <span>+91 9098 111 143</span>
+                                    </div>
+                                    <div className="contact-item">
+                                        <i className="fas fa-envelope"></i>
+                                        <span>vaghelasuraj@ymail.com</span>
+                                    </div>
+                                    <div className="contact-item">
+                                        <i className="fas fa-map-marker-alt"></i>
+                                        <span>Indore, Madhya Pradesh</span>
+                                    </div>
+                                </div>
+                                <div className="resume-download">
+                                    <button className="download-btn" onClick={() => downloadResume()}>
+                                        <i className="fas fa-download"></i>
+                                        Download Resume
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Professional Summary */}
+                    <section className="section">
+                        <div className="container">
+                            <h2 className="section-title">Professional Summary</h2>
+                            <p className="summary">
+                                Experienced Full-Stack Software Engineer with 8+ years in modern web development and team leadership. 
+                                Proven expertise in Node.js, PHP frameworks, and serverless architecture with AWS Lambda. 
+                                Strong background in cloud services, real-time applications, and leading development teams while 
+                                delivering scalable web applications, APIs, and cloud-based solutions.
+                            </p>
+                        </div>
+                    </section>
+
+                    {/* Technical Skills */}
+                    <section className="section">
+                        <div className="container">
+                            <h2 className="section-title">Technical Skills</h2>
+                            <div className="skills-grid">
+                                {Object.entries(skills).map(([category, data]) => (
+                                    <div key={category} className="skill-category">
+                                        <h3 className="skill-title">
+                                            <i className={data.icon}></i>
+                                            {category}
+                                        </h3>
+                                        <div className="skill-list">
+                                            {data.skills.map((skill, index) => (
+                                                <span key={index} className="skill-tag">{skill}</span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Experience */}
+                    <section className="section">
+                        <div className="container">
+                            <h2 className="section-title">Professional Experience</h2>
+                            <div className="experience-timeline">
+                                {experiences.map((exp, index) => (
+                                    <div key={index} className="timeline-item">
+                                        <h3 className="job-title">{exp.title}</h3>
+                                        <div className="company">{exp.company}</div>
+                                        <div className="duration">{exp.duration} • {exp.location}</div>
+                                        <ul className="achievements">
+                                            {exp.achievements.map((achievement, i) => (
+                                                <li key={i}>{achievement}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Key Achievements */}
+                    <section className="section">
+                        <div className="container">
+                            <h2 className="section-title">Key Achievements</h2>
+                            <div className="achievements-grid">
+                                {achievements.map((achievement, index) => (
+                                    <div key={index} className="achievement-card">
+                                        <div className="achievement-number">{achievement.number}</div>
+                                        <div className="achievement-text">{achievement.text}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Education */}
+                    <section className="section">
+                        <div className="container">
+                            <h2 className="section-title">Education</h2>
+                            <div className="education">
+                                <h3 className="degree">Bachelor of Engineering in Computer Science Engineering</h3>
+                                <div className="university">Rajiv Gandhi Proudyogiki Vishwavidyalaya (RGPV)</div>
+                                <div className="duration">September 2011 – May 2016 • Bhopal, Madhya Pradesh</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Footer */}
+                    <footer className="footer">
+                        <div className="container">
+                            <p>&copy; 2024 Suraj Vaghela. Ready to take on new challenges and lead innovative projects.</p>
+                        </div>
+                    </footer>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<Portfolio />, document.getElementById('root'));
+    </script>
+</body>
+</html>
