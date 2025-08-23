@@ -291,6 +291,36 @@
             border-radius: 20px 20px 0 0;
         }
         
+        .resume-download {
+            margin-top: 30px;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(72, 187, 120, 0.6);
+            background: linear-gradient(135deg, #38a169, #2f855a);
+        }
+        
+        .download-btn:active {
+            transform: translateY(0);
+        }
+        
         @media (max-width: 768px) {
             .name {
                 font-size: 2rem;
@@ -411,6 +441,55 @@
                 { number: "100%", text: "On-time Delivery Record" }
             ];
 
+            const downloadResume = async () => {
+                try {
+                    // Try to read the PDF file from the uploaded documents
+                    const fileData = await window.fs.readFile('suraj-vaghela-8-years-nodejs-php-experience.pdf');
+                    
+                    // Create a blob from the file data
+                    const blob = new Blob([fileData], { type: 'application/pdf' });
+                    const url = URL.createObjectURL(blob);
+                    
+                    // Create a temporary link element and trigger download
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'Suraj_Vaghela_Resume.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    // Clean up the URL object
+                    URL.revokeObjectURL(url);
+                } catch (error) {
+                    console.error('Error downloading resume:', error);
+                    // Fallback: Create a simple text file with contact info if PDF fails
+                    const resumeText = `
+SURAJ VAGHELA
+Full-Stack Software Engineer & Team Lead
+
+Contact Information:
+Phone: +91 9098 111 143
+Email: vaghelasuraj@ymail.com
+Location: Indore, Madhya Pradesh
+
+Experience: 8+ years in modern web development and team leadership
+Specializes in: Node.js, PHP, AWS, Team Leadership, Scalable Web Applications
+
+For complete resume, please contact directly.
+                    `;
+                    
+                    const blob = new Blob([resumeText], { type: 'text/plain' });
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'Suraj_Vaghela_Contact_Info.txt';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                }
+            };
+
             return (
                 <div className={`portfolio ${isVisible ? 'visible' : ''}`}>
                     {/* Header Section */}
@@ -435,6 +514,12 @@
                                         <i className="fas fa-map-marker-alt"></i>
                                         <span>Indore, Madhya Pradesh</span>
                                     </div>
+                                </div>
+                                <div className="resume-download">
+                                    <button className="download-btn" onClick={() => downloadResume()}>
+                                        <i className="fas fa-download"></i>
+                                        Download Resume
+                                    </button>
                                 </div>
                             </div>
                         </div>
