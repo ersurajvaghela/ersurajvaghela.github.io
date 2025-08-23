@@ -444,7 +444,7 @@
             const downloadResume = async () => {
                 try {
                     // Try to read the PDF file from the uploaded documents
-                    const fileData = await window.fs.readFile('suraj-vaghela-8-years-nodejs-php-experience.pdf');
+                    const fileData = await window.fs.readFile('public/suraj-vaghela-8-years-nodejs-php-experience.pdf');
                     
                     // Create a blob from the file data
                     const blob = new Blob([fileData], { type: 'application/pdf' });
