@@ -1440,11 +1440,7 @@
                                 <div className="stat-item">
                                     <span className="stat-number">35+</span>
                                     <span className="stat-label">Projects Delivered</span>
-                                </div>
-                                <div className="stat-item">
-                                    <span className="stat-number">10K+</span>
-                                    <span className="stat-label">Users Served</span>
-                                </div>
+                                </div>                               
                             </div>
                             <div className="hero-actions animate-fadeInUp animate-delay-3">
                                 <button className="btn btn-primary" onClick={onDownloadResume}>
@@ -1939,7 +1935,7 @@ ${formData.message}`);
         // Footer Component
         const FooterSection = () => {
             const openWhatsApp = () => {
-                const message = encodeURIComponent("Hi Suraj! I'm interested in your services.");
+                const message = encodeURIComponent("Hi Suraj! I'm interested in ");
                 window.open(`https://wa.me/919098111143?text=${message}`, '_blank');
             };
 
@@ -1995,7 +1991,7 @@ ${formData.message}`);
         const Portfolio = () => {
             const downloadResume = async () => {
                 try {
-                    const pdfUrl = 'https://ersurajvaghela.github.io/public/suraj-vaghela-8-years-nodejs-php-experience.pdf';
+                    const pdfUrl = 'https://ersurajvaghela.github.io/public/suraj-vaghela-8.5-years-Full-stack-experience.pdf';
                     const response = await fetch(pdfUrl);
                     
                     if (!response.ok) {
