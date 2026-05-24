@@ -1,16 +1,227 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Blog</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Suraj Vaghela</title>
+    <meta name="description" content="A simple blog space for sharing insights on full-stack development, cloud architecture, and leadership.">
+    <meta name="robots" content="index, follow">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://ersurajvaghela.github.io/public/css/style.css">
+
+    <style>
+        body {
+            background: linear-gradient(180deg, #f8fafc 0%, #eef4ff 100%);
+        }
+
+        .blog-page {
+            padding-top: 6.5rem;
+            min-height: 100vh;
+        }
+
+        .blog-hero {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 2rem;
+            align-items: stretch;
+            margin-bottom: 2rem;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-hero h1 {
+            font-size: 2.5rem;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+
+        .blog-hero p {
+            color: var(--gray);
+            line-height: 1.75;
+            margin-bottom: 1rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .blog-card {
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 24px;
+            border: 1px solid rgba(0, 102, 204, 0.08);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+        }
+
+        .blog-card h2,
+        .blog-card h3 {
+            margin-bottom: 0.85rem;
+        }
+
+        .blog-card ul {
+            padding-left: 1.2rem;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        .blog-card p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .blog-tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin: 1.2rem 0;
+        }
+
+        .blog-tag {
+            padding: 0.45rem 0.9rem;
+            border-radius: 999px;
+            background: rgba(0, 102, 204, 0.08);
+            color: var(--primary-dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .cta-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .info-box {
+            background: rgba(0, 102, 204, 0.05);
+            border-radius: 18px;
+            padding: 1rem 1.1rem;
+        }
+
+        .info-box strong {
+            display: block;
+            margin-bottom: 0.35rem;
+            color: var(--dark);
+        }
+
+        .footer {
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .blog-hero {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-page {
+                padding-top: 5.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to My Blog</h1>
-    <p>This is where I share my thoughts and experiences.</p>
-    <h2>Recent Posts</h2>
-    <ul>
-        <li><a href="/blog/post1.html">My First Post</a></li>
-        <li><a href="/blog/post2.html">A Day in the Life</a></li>
-        <li><a href="/blog/post3.html">Thoughts on Technology</a></li>
-    </ul>
-</body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="https://ersurajvaghela.github.io/" class="logo code-font">{'<SurajDev />'}</a>
+            <ul class="nav-links">
+                <li><a href="https://ersurajvaghela.github.io/#about">About</a></li>
+                <li><a href="https://ersurajvaghela.github.io/#skills">Skills</a></li>
+                <li><a href="https://ersurajvaghela.github.io/#experience">Experience</a></li>
+                <li><a href="https://ersurajvaghela.github.io/#projects">Projects</a></li>
+                <li><a href="https://ersurajvaghela.github.io/#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
 
+    <main class="blog-page">
+        <div class="container">
+            <div class="blog-hero">
+                <div>
+                    <p class="eyebrow"><i class="fas fa-book-open"></i> Blog space</p>
+                    <h1>Thoughts on building reliable software systems</h1>
+                    <p>
+                        This blog page is set up as a clean starting point for future posts about backend architecture, cloud deployment, team leadership, and practical engineering habits.
+                    </p>
+                    <div class="blog-meta">
+                        <span><i class="fas fa-user"></i> Suraj Vaghela</span>
+                        <span><i class="fas fa-calendar"></i> Updated May 2026</span>
+                        <span><i class="fas fa-tag"></i> Draft / Starter</span>
+                    </div>
+                </div>
+
+                <div class="blog-card">
+                    <h2>Featured draft</h2>
+                    <p>
+                        Start here with a single post to document engineering learnings, architecture decisions, and lessons from real-world delivery.
+                    </p>
+                    <div class="blog-tag-row">
+                        <span class="blog-tag">PHP</span>
+                        <span class="blog-tag">Node.js</span>
+                        <span class="blog-tag">AWS</span>
+                        <span class="blog-tag">Leadership</span>
+                    </div>
+                    <p>
+                        Once you’re ready, replace this placeholder content with your first article and add more pages inside the same folder.
+                    </p>
+                    <div class="cta-row">
+                        <a href="https://ersurajvaghela.github.io/" class="btn btn-primary">Back to portfolio</a>
+                        <a href="https://ersurajvaghela.github.io/#contact" class="btn btn-outline">Discuss a project</a>
+                    </div>
+                </div>
+            </div>
+
+            <section class="blog-card">
+                <h2>How to use this blog folder</h2>
+                <p>
+                    You can now keep your blog content organized under the <strong>blog</strong> folder and add new posts as separate HTML files or expand this page into a full article layout.
+                </p>
+                <div class="info-grid">
+                    <div class="info-box">
+                        <strong>Current setup</strong>
+                        A single landing page linked from the portfolio navigation.
+                    </div>
+                    <div class="info-box">
+                        <strong>Next step</strong>
+                        Replace the placeholder content with your first article.
+                    </div>
+                    <div class="info-box">
+                        <strong>Styling</strong>
+                        Reuses the existing portfolio CSS for a consistent design.
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Suraj Vaghela. Blog page ready for your first post.</p>
+            </div>
+        </div>
+    </footer>
+</body>
 </html>
